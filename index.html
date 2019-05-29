@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>phaser_memory_leak_test</title> 
+    <script src="./phaser.min.js" type="text/javascript">
+    </script>
+  </head>
+  <body>
+    <span>
+      please input the times createAndDestroyGame run
+    </span>
+    <br/>
+    <input id="input" value="100" onchange="handleInput(value)"> 
+    </input> 
+    <br/>
+    <button style="margin: 25px; height: 25px; background-color: #ccc" onclick="createAndDestroyGame()">
+      click run test
+    </button>
+    <div id="container">
+    </div>
+
+    <script>
+      var input = document.getElementById('input');
+      var i = input.value;
+      function handleInput (value) {
+        i = value
+      }
+      function createAndDestroyGame () {
+        var game;
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            parent: 'container',
+            scene: {
+                create: create,
+            }
+        };
+        game = new Phaser.Game(config);
+        function create() {
+            this.add.text(100, 200, 'game created', 
+            { fontFamily: 'Arial', fontSize: 64, color: '#f0f000' });
+            console.log('created', i)
+            game.destroy(true, false)
+        }
+        game.events.on('destroy', function () {
+            console.log('destroyed', i)
+            game = null
+            i--
+            if (i > 0) {
+              createAndDestroyGame()
+            }
+        })
+      }
+    </script>
+  </body>
+</html>
