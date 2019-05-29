@@ -7,7 +7,7 @@
   </head>
   <body>
     <span>
-      please input the times createAndDestroyGame run
+      please input the count createAndDestroyGame run
     </span>
     <br/>
     <input id="input" value="10" onchange="handleInput(value)"> 
@@ -21,10 +21,11 @@
 
     <script>
       var input = document.getElementById('input');
-      var i = input.value;
+      var times = input.value;
       function handleInput (value) {
-        i = value
+        times = value
       }
+      var count = 0
       function createAndDestroyGame () {
         var game;
         var config = {
@@ -40,20 +41,19 @@
         game = new Phaser.Game(config);
         function preload () {
           this.load.image('dude', 'https://phaser.io/images/img6.png');
-          
+
         }
         function create () {
             this.add.image(400, 300, 'dude')
             this.add.text(100, 200, 'game created', 
             { fontFamily: 'Arial', fontSize: 64, color: '#f0f000' });
-            console.log('created', i)
+            console.log('created', ++count)
             game.destroy(true, false)
         }
         game.events.on('destroy', function () {
-            console.log('destroyed', i)
+            console.log('destroyed', count)
             game = null
-            i--
-            if (i > 0) {
+            if (count < times) {
               createAndDestroyGame()
             }
         })
