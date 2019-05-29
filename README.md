@@ -1,8 +1,8 @@
 # phaser memory leak test demo
 
 # to phaser author
-  We built a SPA and use phaser to create game. In our project, the game instance has to be created and destroyed for many times. Mean while, we found that, the momory
-  increased gradually.What was the worest, our app in mobile would be crashed, so we test the memory leak through this demo. Looking forward to your reply.
+  We built a SPA and use phaser to create game. In our project, the game instance created and destroyed for many times. Mean while, we found that, the momory
+  increased every time.What was the worest, our app in mobile always crashed, so we test the memory leak by this demo. Looking forward to your reply.
 
 # run test
  * open the link [https://atbulbs.github.io/phaser_memory_leak_test/](https://atbulbs.github.io/phaser_memory_leak_test/)
